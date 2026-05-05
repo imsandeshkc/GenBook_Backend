@@ -1,4 +1,4 @@
-require("dotenv").config(); // CRITICAL: This MUST be the first line of code!
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -12,9 +12,14 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://your-frontend.vercel.app", "http://localhost:5173"], // Add your actual Vercel link here
+    credentials: true,
+  }),
+);
 app.use(express.json());
-// NEW: Added this to help parse multipart/form-data fields correctly
+
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to Database
@@ -32,7 +37,6 @@ app.use("/api/payments", paymentRoutes);
 
 app.use("/api/orders", require("./routes/orderRoutes"));
 
-// Basic Route for Testing
 app.get("/", (req, res) => {
   res.send("GenBook Server is running!");
 });
