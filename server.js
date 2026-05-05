@@ -14,10 +14,7 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: [
-      "https://gen-book-frontend.vercel.app",
-      "https://gen-book-frontend.vercel.app/",
-    ],
+    origin: ["https://gen-book-frontend.vercel.app", "http://localhost:5173"],
     credentials: true,
   }),
 );
