@@ -14,10 +14,11 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: ["https://your-frontend.vercel.app", "http://localhost:5173"], // Add your actual Vercel link here
+    origin: "https://gen-book-frontend.vercel.app",
     credentials: true,
   }),
 );
+
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
