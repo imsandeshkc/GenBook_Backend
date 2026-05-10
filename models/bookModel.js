@@ -1,19 +1,18 @@
 const mongoose = require("mongoose");
 
-// Define a separate schema for reviews to track details more clearly
 const reviewSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true }, // Name of the reviewer
-    rating: { type: Number, required: true }, // Score from 1 to 5
-    comment: { type: String, required: true }, // The text feedback
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
-    }, // Reference to the User model
+    },
   },
   {
-    timestamps: true, // Track when the review was written
+    timestamps: true,
   },
 );
 
@@ -25,19 +24,16 @@ const bookSchema = new mongoose.Schema(
     description: { type: String, required: true },
     category: { type: String, required: true },
     stock: { type: Number, required: true },
-    image: { type: String }, // URL for the book cover
+    image: { type: String },
 
-    // An array of review sub-documents
     reviews: [reviewSchema],
 
-    // The calculated average rating of all reviews
     rating: {
       type: Number,
       required: true,
       default: 0,
     },
 
-    // Total count of reviews for easier display
     numReviews: {
       type: Number,
       required: true,
@@ -45,7 +41,7 @@ const bookSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Track when the book was added or modified
+    timestamps: true,
   },
 );
 

@@ -11,7 +11,7 @@ exports.addOrderItems = async (req, res) => {
   } else {
     const order = new Order({
       orderItems,
-      user: req.user._id, // From authMiddleware
+      user: req.user._id,
       shippingAddress,
       totalPrice,
     });

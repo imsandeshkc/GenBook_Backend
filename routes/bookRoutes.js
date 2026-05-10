@@ -18,14 +18,12 @@ router.route("/:id/reviews").post(protect, createBookReview);
 router
   .route("/")
   .get(getBooks)
-  // upload.single('image') MUST be here to parse FormData fields like 'title'
   .post(protect, admin, upload.single("image"), createBook);
 
 // --- Single Book Routes (Get, Update, Delete) ---
 router
   .route("/:id")
   .get(getBookById)
-  // upload.single('image') MUST be here for updates too
   .put(protect, admin, upload.single("image"), updateBook)
   .delete(protect, admin, deleteBook);
 

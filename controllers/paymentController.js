@@ -5,9 +5,6 @@ const crypto = require("crypto");
 exports.initiateEsewa = async (req, res) => {
   try {
     const { amount, transaction_uuid, product_code } = req.body;
-
-    // We force amount to a string to ensure no hidden decimals mess up the hash
-    // eSewa v2 signature format: total_amount=XXX,transaction_uuid=XXX,product_code=XXX
     const message = `total_amount=${String(amount)},transaction_uuid=${String(transaction_uuid)},product_code=${String(product_code)}`;
 
     const secret = process.env.ESEWA_SECRET_KEY;
@@ -19,7 +16,7 @@ exports.initiateEsewa = async (req, res) => {
 
     res.json({
       signature: hash,
-      message: message, // Sending this back helps you debug if needed
+      message: message,
     });
   } catch (error) {
     console.error("Signature Error:", error);

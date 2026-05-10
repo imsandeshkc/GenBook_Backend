@@ -4,13 +4,12 @@ const Cart = require("../models/cartModel");
 // @route   POST /api/cart
 exports.addToCart = async (req, res) => {
   const { bookId, title, price, quantity } = req.body;
-  const userId = req.user._id; // Taken from 'protect' middleware
+  const userId = req.user._id;
 
   try {
     let cart = await Cart.findOne({ userId });
 
     if (cart) {
-      // If cart exists, check if book is already in it
       const itemIndex = cart.items.findIndex((p) => p.bookId == bookId);
 
       if (itemIndex > -1) {
@@ -21,7 +20,6 @@ exports.addToCart = async (req, res) => {
       cart = await cart.save();
       return res.status(201).json(cart);
     } else {
-      // No cart for this user, create a new one
       const newCart = await Cart.create({
         userId,
         items: [{ bookId, title, price, quantity }],

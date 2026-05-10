@@ -42,7 +42,7 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/orders", require("./routes/orderRoutes"));
 
 app.get("/", (req, res) => {
-  res.send("GenBook Server is running!");
+  res.send("GenBook Server is running! ⭐🔥");
 });
 
 const PORT = process.env.PORT || 5000;

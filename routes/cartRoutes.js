@@ -7,7 +7,6 @@ const {
 } = require("../controllers/cartController");
 const { protect } = require("../middleware/authMiddleware");
 
-// All cart routes require the user to be logged in
 router
   .route("/")
   .post(protect, addToCart)
